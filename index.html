@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>CALCULATOR</title>
+  </head>  
+
+			
+
+
+
+<title>Калькулятор</title>
+
+
+<style>
+
+* {
+    
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    padding: 50px 0 0;
+    background: #f9f9a3;
+
+}
+.form__btn {
+    background: #654321;
+}
+.form__btn:hover {
+    background: #A06846;
+    border: 1px solid rgba(0,0,0,0.3);
+}
+
+ul {
+    list-style: none;
+}
+
+.form {
+    max-width: 600px;
+    margin: AUTO ;
+}
+
+.form__title {
+    font-size: 50px;
+    margin-bottom: 40px;    
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    flex-shrink: 0;
+}
+.form__list {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+        padding-left: 0 !important;
+}
+.form__item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.form__label {
+    margin-bottom: 0.5rem;
+    display: block;
+}
+    .form__inp {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #000000;
+    border-radius: 0.3rem;
+   
+    border-radius: 0px;
+}
+.form__btn {
+    color: #fff;
+    border: none;
+    outline: none;
+    padding: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.5s;
+    font-size: 20px;
+    border-radius: 20px;
+    color: #131313;
+    color:#fff;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+
+
+.result {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.result__line {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1140px;
+    width: 100%;
+}
+.result__card {
+    width: 100%;
+
+    max-width: 300px;
+    height: 520px;
+    
+    max-width: 220px;
+    height: 380px;
+    
+    border-radius: 20px;
+    background: #fff;
+    margin: 0 40px;
+    position: relative;
+    box-shadow: 2px 2px 20px rgb(0 0 0 / 70%);
+    margin-bottom: 100px;
+}
+
+.result__num {
+    position: absolute;
+    left: -25px;
+    top: -15px;
+    font-weight: bold;
+    border-radius: 100%;
+    background: #fff;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+.result__image {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+.result__image img {
+    max-width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px;
+}
+.result__digital {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    /*right: 0;*/
+    /*bottom: 0;*/
+    width: 100%;
+    /*height: 100%;*/
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #131313;
+    /*font-size: 50px;*/
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.result__label {
+    position: absolute;
+    /*bottom: 20px;*/
+    bottom: -50px;
+    color: #131313;
+    padding: 20px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 0 0 20px 20px;
+        min-height: 40px;
+        display: flex;
+        /*align-items: flex-end;*/
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+}
+.result__label span {
+    z-index: 3; 
+    position: relative;
+}
+.result__card:before {
+    content: '';
+    border-radius: 20px;
+    z-index: 2; 
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 50%;
+    background: -webkit-linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(0, 0, 0));
+    background: -moz-linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(0, 0, 0));
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0), rgb(0, 0, 0));
+}
+
+
+.footer__wrap {
+    width: 100%;
+    padding: 0 20px;
+    display: none;
+}
+.footer_btns {
+        display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-bottom:50px;
+}
+.footer_btn {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 20px 20px;
+}
+.footer_btn-label {
+    font-size:20px;
+}
+.footer_btn .form__btn {
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    background: #ffffff;
+    color: #fff !important;
+    text-decoration: none;
+}
+.footer_btn .form__btn:hover {
+    background: #f5b3b3;
+}
+
+.result__legenda {
+    max-width: 600px;
+    margin: 0 auto 50px;
+    border-radius: 20px;
+    /* border: 1px solid #080707; */
+    background: #f5b3b3;
+    color: #fff;
+    padding: 30px;
+    font-size: 20px;
+    box-shadow: 2px 2px 20px rgb(0 0 0 / 20%);
+}
+.legenda__item {
+    margin-bottom:5px;
+}
+
+.legenda__item:last-of-type {
+    margin-bottom: 0;
+}
+
+
+@media screen and (max-width: 900px) {
+
+    .footer_btns {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 767px) {
+
+    body {
+        padding: 20px 20px 0;
+        padding: 0;
+        
+    }
+    
+    .form {
+        padding: 0 20px;
+    }
+    
+    .form__title {
+        font-size: 30px;
+    }
+    
+    .result {
+        padding: 0 20px;
+    }
+
+
+    .result__line {
+        /*width: calc(100% + 20px);*/
+        position: relative;
+        /*left: -10px;*/
+
+        width: calc(100% + 30px);
+        left: -15px;
+    }
+    .result__card {
+        /*height: 400px;*/
+        max-width: calc(33% - 4px - 4px);
+        /*margin: 0 4px;*/
+        margin-left: 4px;
+        margin-right: 4px;
+        margin-bottom: 80px;
+        /*height: 140px;*/
+        height: 200px;
+    }
+    .result__label {
+        padding: 0 10px;
+        bottom: -40px;
+        font-size: 14px;
+        min-height: 40px;
+        display: flex;
+        /*align-items: flex-end;*/
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+    }
+
+    .result__num {
+        left: 0;
+        top: 0;
+    }
+    .result__legenda {
+        width: calc(100% + 30px);
+        left: -15px;
+        position: relative;
+        box-shadow:none;
+    }
+
+}
+
+
+
+</style>    
+
+
+
+<table align="center">
+
+<tr >
+<td align="center">
+
+    <div class="form">
+        <h1 class="form__title">Калькулятор расчета</h1>
+        <ul class="form__list">
+            <li class="form__item">
+                <label for="" class="form__label">Введите дату рождения</label>
+                <input type="number" class="form__inp user_date" placeholder="Дата" value="" min="1" max="31">
+         </li>
+        <li class="form__item">
+            <label for="" class="form__label">Введите месяц рождения</label>
+            <input type="number" class="form__inp user_month" placeholder="Месяц" value="" min="1" max="12">
+        </li>
+        <li class="form__item">
+            <label for="" class="form__label">Введите год рождения</label>
+            <input type="number" class="form__inp user_year" placeholder="Год рождения" value="" min="1920" max="2022">
+        </li>
+        <li class="form__item">
+           <button class="form__btn">Рассчитать</button>
+        </li>
+    </ul>
+    </div>
+</td>
+</tr>
+   
+<tr> 
+<td align="center">
+
+<div class="result">
+
+    <div class="result__line">
+        <div class="result__card" data-card="1">
+            <div class="result__num">1</div>
+            <div class="result__image">
+                <img src="" alt="">
+            </div>
+            <div class="result__digital"></div>
+            <div class="result__label"><span>Подпись #1</span></div>
+        </div>
+        <div class="result__card" data-card="2">
+            <div class="result__num">2</div>
+            <div class="result__image">
+                <img src="" alt="">
+            </div>
+            <div class="result__digital"></div>
+            <div class="result__label"><span>Подпись #2</span></div>
+        </div>
+        <div class="result__card" data-card="3">
+            <div class="result__num">3</div>
+            <div class="result__image">
+                <img src="" alt="">
+            </div>
+            <div class="result__digital"></div>
+            <div class="result__label"><span>Подпись #3</span></div>
+        </div>
+    </div>
+
+    <div class="result__line">
+        <div class="result__card" data-card="4">
+            <div class="result__num">4</div>
+            <div class="result__image">
+                <img src="" alt="">
+            </div>
+            <div class="result__digital"></div>
+            <div class="result__label"><span>Подпись #4</span></div>
+        </div>
+        <div class="result__card" data-card="5">
+            <div class="result__num">5</div>
+            <div class="result__image">
+                <img src="" alt="">
+            </div>
+            <div class="result__digital"></div>
+            <div class="result__label"><span>Подпись #5</span></div>
+        </div>
+    </div>
+    <div class="result__line">
+        <div class="result__card" data-card="6">
+            <div class="result__num">6</div>
+            <div class="result__image">
+                <img src="" alt="">
+            </div>
+            <div class="result__digital"></div>
+            <div class="result__label"><span>Подпись #6</span></div>
+        </div>
+    </div>
+    
+    
+    
+
+<div class="result__legenda">
+    <div class="legenda__item">1 позиция - задача души и талант</div>
+    <div class="legenda__item">2 позиция - психологическая школа взросления</div>
+    <div class="legenda__item">3 позиция - экзаменатор</div>
+    <div class="legenda__item">4 позиция - внутренний конфликт</div>
+    <div class="legenda__item">5 позиция - ценности</div>
+    <div class="legenda__item">6 позиция - дар</div>
+</div>
+    
+</div>
+</td>
+</tr>
+</table>
+
+
+<!-- ============================== Scripts ====================================== -->
+<script src="./CALCULATOR_files/jquery-3.1.1.min.js.загрузка"></script>
+
+<script>
+    $(document).ready(function() {
+        
+        
+
+
+
+        $('.user_date').on('change',function(){
+
+            user_date = $('.user_date').val();
+
+            if (user_date < 1) {
+                user_date = 1;
+                $('.user_date').val(user_date)
+            } else if (user_date > 31) {
+                user_date = 31;
+                $('.user_date').val(user_date)
+            } else {}   
+
+        });
+
+        $('.user_month').on('change',function(){
+
+            user_month = $('.user_month').val();
+
+            if (user_month < 1) {
+                user_month = 1;
+                $('.user_month').val(user_month)
+            } else if (user_month > 12) {
+                user_month = 12;
+                $('.user_month').val(user_month)
+            } else {}   
+
+        });
+
+        $('.user_year').on('change',function(){
+
+            user_year = $('.user_year').val();
+
+            if (user_year < 1920) {
+                user_year = 1920;
+                $('.user_year').val(user_year)
+            } else if (user_year > 2022) {
+                user_year = 2022;
+                $('.user_year').val(user_year)
+            } else {}   
+
+        });
+
+
+
+        $('.user_date, .user_month, .user_year').bind("change keyup input click", function() {
+            if (this.value.match(/[^0-9]/g)) {
+                this.value = this.value.replace(/[^0-9]/g, '');
+            }
+        });
+
+
+        $('.form__btn').on('click',function(){
+
+            user_date = parseInt($('.user_date').val());
+            user_month = parseInt($('.user_month').val());
+            user_year = parseInt($('.user_year').val());
+
+            if (user_date == '') {
+                alert('Введите дату рождения');
+                return false;
+            } 
+
+            if (user_month == '') {
+                alert('Введите месяц рождения');
+                return false;
+            }
+            if (user_year == '') {
+                alert('Введите год рождения');
+                return false;
+            } 
+
+            console.log('user_date => ' + user_date);
+            console.log('user_month => ' + user_month);
+            console.log('user_year => ' + user_year);
+            console.log('=======');
+            
+
+            resultCard1 = parseInt(user_date);
+            resultCard1Digital = parseInt(user_date);
+
+            if (resultCard1 > 22) {
+                resultCard1 = parseInt(user_date) - 22;
+                resultCard1Digital = parseInt(user_date) - 22;
+            }
+
+            switch (resultCard1) {
+              case 1: resultCard1 = 'I'; resultCard1Image = 'https://static.tildacdn.com/tild6333-6666-4838-b539-373162313631/1.jpg'; resultCard1Label = 'Маг'; break;
+              case 2: resultCard1 = 'II'; resultCard1Image = 'https://static.tildacdn.com/tild3030-6539-4164-a539-333730366565/2.jpg'; resultCard1Label = 'Жрица'; break;
+              case 3: resultCard1 = 'III'; resultCard1Image = 'https://static.tildacdn.com/tild6435-6434-4535-b263-613462656164/3.jpg'; resultCard1Label = 'Императрица'; break;
+              case 4: resultCard1 = 'IV'; resultCard1Image = 'https://static.tildacdn.com/tild6437-3835-4566-b631-323761643636/4.jpg'; resultCard1Label = 'Император'; break;
+              case 5: resultCard1 = 'V'; resultCard1Image = 'https://static.tildacdn.com/tild3535-6162-4362-b330-663461663434/5.jpg'; resultCard1Label = 'Жрец'; break;
+              case 6: resultCard1 = 'VI'; resultCard1Image = 'https://static.tildacdn.com/tild3434-6236-4631-b730-353831353230/6.jpg'; resultCard1Label = 'Влюбленные'; break;
+              case 7: resultCard1 = 'VII'; resultCard1Image = 'https://static.tildacdn.com/tild6666-6337-4964-b363-343439363534/7.jpg'; resultCard1Label = 'Колесница'; break;
+              case 8: resultCard1 = 'VIII'; resultCard1Image = 'https://static.tildacdn.com/tild6132-3838-4830-b636-323338303234/8.jpg'; resultCard1Label = 'Правосудие'; break;
+              case 9: resultCard1 = 'IX'; resultCard1Image = 'https://static.tildacdn.com/tild6439-6333-4134-b065-353665663834/9.jpg'; resultCard1Label = 'Отшельник'; break;
+              case 10: resultCard1 = 'X'; resultCard1Image = 'https://static.tildacdn.com/tild6464-3561-4862-b339-356633343531/10.jpg'; resultCard1Label = 'Колесо Фортуны'; break;
+              case 11: resultCard1 = 'XI'; resultCard1Image = 'https://static.tildacdn.com/tild3132-3565-4332-b166-376133373935/11.jpg'; resultCard1Label = 'Сила'; break;
+              case 12: resultCard1 = 'XII'; resultCard1Image = 'https://static.tildacdn.com/tild6566-3534-4165-b262-333337323961/12.jpg'; resultCard1Label = 'Повешенный'; break;
+              case 13: resultCard1 = 'XIII'; resultCard1Image = 'https://static.tildacdn.com/tild6433-6536-4839-b337-653036623336/13.jpg'; resultCard1Label = 'Смерть'; break;
+              case 14: resultCard1 = 'XIV'; resultCard1Image = 'https://static.tildacdn.com/tild6238-3433-4962-b139-613138346130/14.jpg'; resultCard1Label = 'Равновесие'; break;
+              case 15: resultCard1 = 'XV'; resultCard1Image = 'https://static.tildacdn.com/tild6165-6261-4863-a166-383136383834/15.jpg'; resultCard1Label = 'Дьявол'; break;
+              case 16: resultCard1 = 'XVI'; resultCard1Image = 'https://static.tildacdn.com/tild6266-3135-4565-a332-656462643063/16.jpg'; resultCard1Label = 'Башня'; break;
+              case 17: resultCard1 = 'XVII'; resultCard1Image = 'https://static.tildacdn.com/tild3736-3864-4365-b931-376239613736/17.jpg'; resultCard1Label = 'Звезда'; break;
+              case 18: resultCard1 = 'XVIII'; resultCard1Image = 'https://static.tildacdn.com/tild3333-3965-4033-a139-656265353936/18.jpg'; resultCard1Label = 'Луна'; break;
+              case 19: resultCard1 = 'XIX'; resultCard1Image = 'https://static.tildacdn.com/tild3365-3566-4165-a337-326362383230/19.jpg'; resultCard1Label = 'Солнце'; break;
+              case 20: resultCard1 = 'XX'; resultCard1Image = 'https://static.tildacdn.com/tild6136-6338-4232-b338-396632666664/20.jpg'; resultCard1Label = 'Суд'; break;
+              case 21: resultCard1 = 'XXI'; resultCard1Image = 'https://static.tildacdn.com/tild3866-6161-4466-b862-646365343433/21.jpg'; resultCard1Label = 'Мир'; break;
+              case 22: resultCard1 = 'XXII'; resultCard1Image = 'https://static.tildacdn.com/tild3639-3663-4833-b865-346332323935/22.jpg'; resultCard1Label = 'Шут'; break;
+              default:
+                // alert( "" );
+            }
+
+            resultCard2 = parseInt(user_month);
+            resultCard2Digital = parseInt(user_month);
+
+            switch (resultCard2) {
+              case 1: resultCard2 = 'I'; resultCard2Image = 'https://static.tildacdn.com/tild6333-6666-4838-b539-373162313631/1.jpg'; resultCard2Label = 'Маг'; break;
+              case 2: resultCard2 = 'II'; resultCard2Image = 'https://static.tildacdn.com/tild3030-6539-4164-a539-333730366565/2.jpg'; resultCard2Label = 'Жрица'; break;
+              case 3: resultCard2 = 'III'; resultCard2Image = 'https://static.tildacdn.com/tild6435-6434-4535-b263-613462656164/3.jpg'; resultCard2Label = 'Императрица'; break;
+              case 4: resultCard2 = 'IV'; resultCard2Image = 'https://static.tildacdn.com/tild6437-3835-4566-b631-323761643636/4.jpg'; resultCard2Label = 'Император'; break;
+              case 5: resultCard2 = 'V'; resultCard2Image = 'https://static.tildacdn.com/tild3535-6162-4362-b330-663461663434/5.jpg'; resultCard2Label = 'Жрец'; break;
+              case 6: resultCard2 = 'VI'; resultCard2Image = 'https://static.tildacdn.com/tild3434-6236-4631-b730-353831353230/6.jpg'; resultCard2Label = 'Влюбленные'; break;
+              case 7: resultCard2 = 'VII'; resultCard2Image = 'https://static.tildacdn.com/tild6666-6337-4964-b363-343439363534/7.jpg'; resultCard2Label = 'Колесница'; break;
+              case 8: resultCard2 = 'VIII'; resultCard2Image = 'https://static.tildacdn.com/tild6132-3838-4830-b636-323338303234/8.jpg'; resultCard2Label = 'Правосудие'; break;
+              case 9: resultCard2 = 'IX'; resultCard2Image = 'https://static.tildacdn.com/tild6439-6333-4134-b065-353665663834/9.jpg'; resultCard2Label = 'Отшельник'; break;
+              case 10: resultCard2 = 'X'; resultCard2Image = 'https://static.tildacdn.com/tild6464-3561-4862-b339-356633343531/10.jpg'; resultCard2Label = 'Колесо Фортуны'; break;
+              case 11: resultCard2 = 'XI'; resultCard2Image = 'https://static.tildacdn.com/tild3132-3565-4332-b166-376133373935/11.jpg'; resultCard2Label = 'Сила'; break;
+              case 12: resultCard2 = 'XII'; resultCard2Image = 'https://static.tildacdn.com/tild6566-3534-4165-b262-333337323961/12.jpg'; resultCard2Label = 'Повешенный'; break;
+              case 13: resultCard2 = 'XIII'; resultCard2Image = 'https://static.tildacdn.com/tild6433-6536-4839-b337-653036623336/13.jpg'; resultCard2Label = 'Смерть'; break;
+              case 14: resultCard2 = 'XIV'; resultCard2Image = 'https://static.tildacdn.com/tild6238-3433-4962-b139-613138346130/14.jpg'; resultCard2Label = 'Равновесие'; break;
+              case 15: resultCard2 = 'XV'; resultCard2Image = 'https://static.tildacdn.com/tild6165-6261-4863-a166-383136383834/15.jpg'; resultCard2Label = 'Дьявол'; break;
+              case 16: resultCard2 = 'XVI'; resultCard2Image = 'https://static.tildacdn.com/tild6266-3135-4565-a332-656462643063/16.jpg'; resultCard2Label = 'Башня'; break;
+              case 17: resultCard2 = 'XVII'; resultCard2Image = 'https://static.tildacdn.com/tild3736-3864-4365-b931-376239613736/17.jpg'; resultCard2Label = 'Звезда'; break;
+              case 18: resultCard2 = 'XVIII'; resultCard2Image = 'https://static.tildacdn.com/tild3333-3965-4033-a139-656265353936/18.jpg'; resultCard2Label = 'Луна'; break;
+              case 19: resultCard2 = 'XIX'; resultCard2Image = 'https://static.tildacdn.com/tild3365-3566-4165-a337-326362383230/19.jpg'; resultCard2Label = 'Солнце'; break;
+              case 20: resultCard2 = 'XX'; resultCard2Image = 'https://static.tildacdn.com/tild6136-6338-4232-b338-396632666664/20.jpg'; resultCard2Label = 'Суд'; break;
+              case 21: resultCard2 = 'XXI'; resultCard2Image = 'https://static.tildacdn.com/tild3866-6161-4466-b862-646365343433/21.jpg'; resultCard2Label = 'Мир'; break;
+              case 22: resultCard2 = 'XXII'; resultCard2Image = 'https://static.tildacdn.com/tild3639-3663-4833-b865-346332323935/22.jpg'; resultCard2Label = 'Шут'; break;
+              default:
+                // alert( "" );
+            }
+
+            resultCard3 = digit(user_year);
+            resultCard3Digital = digit(user_year);
+
+            if (resultCard3 > 22) {
+                resultCard3 = parseInt(resultCard3) - 22;
+                resultCard3Digital = parseInt(resultCard3Digital) - 22;
+            }
+            switch (resultCard3) {
+              case 1: resultCard3 = 'I'; resultCard3Image = 'https://static.tildacdn.com/tild6333-6666-4838-b539-373162313631/1.jpg'; resultCard3Label = 'Маг'; break;
+              case 2: resultCard3 = 'II'; resultCard3Image = 'https://static.tildacdn.com/tild3030-6539-4164-a539-333730366565/2.jpg'; resultCard3Label = 'Жрица'; break;
+              case 3: resultCard3 = 'III'; resultCard3Image = 'https://static.tildacdn.com/tild6435-6434-4535-b263-613462656164/3.jpg'; resultCard3Label = 'Императрица'; break;
+              case 4: resultCard3 = 'IV'; resultCard3Image = 'https://static.tildacdn.com/tild6437-3835-4566-b631-323761643636/4.jpg'; resultCard3Label = 'Император'; break;
+              case 5: resultCard3 = 'V'; resultCard3Image = 'https://static.tildacdn.com/tild3535-6162-4362-b330-663461663434/5.jpg'; resultCard3Label = 'Жрец'; break;
+              case 6: resultCard3 = 'VI'; resultCard3Image = 'https://static.tildacdn.com/tild3434-6236-4631-b730-353831353230/6.jpg'; resultCard3Label = 'Влюбленные'; break;
+              case 7: resultCard3 = 'VII'; resultCard3Image = 'https://static.tildacdn.com/tild6666-6337-4964-b363-343439363534/7.jpg'; resultCard3Label = 'Колесница'; break;
+              case 8: resultCard3 = 'VIII'; resultCard3Image = 'https://static.tildacdn.com/tild6132-3838-4830-b636-323338303234/8.jpg'; resultCard3Label = 'Правосудие'; break;
+              case 9: resultCard3 = 'IX'; resultCard3Image = 'https://static.tildacdn.com/tild6439-6333-4134-b065-353665663834/9.jpg'; resultCard3Label = 'Отшельник'; break;
+              case 10: resultCard3 = 'X'; resultCard3Image = 'https://static.tildacdn.com/tild6464-3561-4862-b339-356633343531/10.jpg'; resultCard3Label = 'Колесо Фортуны'; break;
+              case 11: resultCard3 = 'XI'; resultCard3Image = 'https://static.tildacdn.com/tild3132-3565-4332-b166-376133373935/11.jpg'; resultCard3Label = 'Сила'; break;
+              case 12: resultCard3 = 'XII'; resultCard3Image = 'https://static.tildacdn.com/tild6566-3534-4165-b262-333337323961/12.jpg'; resultCard3Label = 'Повешенный'; break;
+              case 13: resultCard3 = 'XIII'; resultCard3Image = 'https://static.tildacdn.com/tild6433-6536-4839-b337-653036623336/13.jpg'; resultCard3Label = 'Смерть'; break;
+              case 14: resultCard3 = 'XIV'; resultCard3Image = 'https://static.tildacdn.com/tild6238-3433-4962-b139-613138346130/14.jpg'; resultCard3Label = 'Равновесие'; break;
+              case 15: resultCard3 = 'XV'; resultCard3Image = 'https://static.tildacdn.com/tild6165-6261-4863-a166-383136383834/15.jpg'; resultCard3Label = 'Дьявол'; break;
+              case 16: resultCard3 = 'XVI'; resultCard3Image = 'https://static.tildacdn.com/tild6266-3135-4565-a332-656462643063/16.jpg'; resultCard3Label = 'Башня'; break;
+              case 17: resultCard3 = 'XVII'; resultCard3Image = 'https://static.tildacdn.com/tild3736-3864-4365-b931-376239613736/17.jpg'; resultCard3Label = 'Звезда'; break;
+              case 18: resultCard3 = 'XVIII'; resultCard3Image = 'https://static.tildacdn.com/tild3333-3965-4033-a139-656265353936/18.jpg'; resultCard3Label = 'Луна'; break;
+              case 19: resultCard3 = 'XIX'; resultCard3Image = 'https://static.tildacdn.com/tild3365-3566-4165-a337-326362383230/19.jpg'; resultCard3Label = 'Солнце'; break;
+              case 20: resultCard3 = 'XX'; resultCard3Image = 'https://static.tildacdn.com/tild6136-6338-4232-b338-396632666664/20.jpg'; resultCard3Label = 'Суд'; break;
+              case 21: resultCard3 = 'XXI'; resultCard3Image = 'https://static.tildacdn.com/tild3866-6161-4466-b862-646365343433/21.jpg'; resultCard3Label = 'Мир'; break;
+              case 22: resultCard3 = 'XXII'; resultCard3Image = 'https://static.tildacdn.com/tild3639-3663-4833-b865-346332323935/22.jpg'; resultCard3Label = 'Шут'; break;
+              default:
+                // alert( "" );
+            }
+
+            resultCard4 = parseInt(resultCard1Digital) + parseInt(resultCard2Digital);
+            resultCard4Digital = parseInt(resultCard1Digital) + parseInt(resultCard2Digital);
+
+            if (resultCard4 > 22) {
+                resultCard4 = resultCard4 - 22;
+                resultCard4Digital = resultCard4Digital - 22;
+            }
+            switch (resultCard4) {
+              case 1: resultCard4 = 'I'; resultCard4Image = 'https://static.tildacdn.com/tild6333-6666-4838-b539-373162313631/1.jpg'; resultCard4Label = 'Маг'; break;
+              case 2: resultCard4 = 'II'; resultCard4Image = 'https://static.tildacdn.com/tild3030-6539-4164-a539-333730366565/2.jpg'; resultCard4Label = 'Жрица'; break;
+              case 3: resultCard4 = 'III'; resultCard4Image = 'https://static.tildacdn.com/tild6435-6434-4535-b263-613462656164/3.jpg'; resultCard4Label = 'Императрица'; break;
+              case 4: resultCard4 = 'IV'; resultCard4Image = 'https://static.tildacdn.com/tild6437-3835-4566-b631-323761643636/4.jpg'; resultCard4Label = 'Император'; break;
+              case 5: resultCard4 = 'V'; resultCard4Image = 'https://static.tildacdn.com/tild3535-6162-4362-b330-663461663434/5.jpg'; resultCard4Label = 'Жрец'; break;
+              case 6: resultCard4 = 'VI'; resultCard4Image = 'https://static.tildacdn.com/tild3434-6236-4631-b730-353831353230/6.jpg'; resultCard4Label = 'Влюбленные'; break;
+              case 7: resultCard4 = 'VII'; resultCard4Image = 'https://static.tildacdn.com/tild6666-6337-4964-b363-343439363534/7.jpg'; resultCard4Label = 'Колесница'; break;
+              case 8: resultCard4 = 'VIII'; resultCard4Image = 'https://static.tildacdn.com/tild6132-3838-4830-b636-323338303234/8.jpg'; resultCard4Label = 'Правосудие'; break;
+              case 9: resultCard4 = 'IX'; resultCard4Image = 'https://static.tildacdn.com/tild6439-6333-4134-b065-353665663834/9.jpg'; resultCard4Label = 'Отшельник'; break;
+              case 10: resultCard4 = 'X'; resultCard4Image = 'https://static.tildacdn.com/tild6464-3561-4862-b339-356633343531/10.jpg'; resultCard4Label = 'Колесо Фортуны'; break;
+              case 11: resultCard4 = 'XI'; resultCard4Image = 'https://static.tildacdn.com/tild3132-3565-4332-b166-376133373935/11.jpg'; resultCard4Label = 'Сила'; break;
+              case 12: resultCard4 = 'XII'; resultCard4Image = 'https://static.tildacdn.com/tild6566-3534-4165-b262-333337323961/12.jpg'; resultCard4Label = 'Повешенный'; break;
+              case 13: resultCard4 = 'XIII'; resultCard4Image = 'https://static.tildacdn.com/tild6433-6536-4839-b337-653036623336/13.jpg'; resultCard4Label = 'Смерть'; break;
+              case 14: resultCard4 = 'XIV'; resultCard4Image = 'https://static.tildacdn.com/tild6238-3433-4962-b139-613138346130/14.jpg'; resultCard4Label = 'Равновесие'; break;
+              case 15: resultCard4 = 'XV'; resultCard4Image = 'https://static.tildacdn.com/tild6165-6261-4863-a166-383136383834/15.jpg'; resultCard4Label = 'Дьявол'; break;
+              case 16: resultCard4 = 'XVI'; resultCard4Image = 'https://static.tildacdn.com/tild6266-3135-4565-a332-656462643063/16.jpg'; resultCard4Label = 'Башня'; break;
+              case 17: resultCard4 = 'XVII'; resultCard4Image = 'https://static.tildacdn.com/tild3736-3864-4365-b931-376239613736/17.jpg'; resultCard4Label = 'Звезда'; break;
+              case 18: resultCard4 = 'XVIII'; resultCard4Image = 'https://static.tildacdn.com/tild3333-3965-4033-a139-656265353936/18.jpg'; resultCard4Label = 'Луна'; break;
+              case 19: resultCard4 = 'XIX'; resultCard4Image = 'https://static.tildacdn.com/tild3365-3566-4165-a337-326362383230/19.jpg'; resultCard4Label = 'Солнце'; break;
+              case 20: resultCard4 = 'XX'; resultCard4Image = 'https://static.tildacdn.com/tild6136-6338-4232-b338-396632666664/20.jpg'; resultCard4Label = 'Суд'; break;
+              case 21: resultCard4 = 'XXI'; resultCard4Image = 'https://static.tildacdn.com/tild3866-6161-4466-b862-646365343433/21.jpg'; resultCard4Label = 'Мир'; break;
+              case 22: resultCard4 = 'XXII'; resultCard4Image = 'https://static.tildacdn.com/tild3639-3663-4833-b865-346332323935/22.jpg'; resultCard4Label = 'Шут'; break;
+              default:
+                // alert( "" );
+            }
+
+            resultCard5 = parseInt(resultCard2Digital) + parseInt(resultCard3Digital);
+            resultCard5Digital = parseInt(resultCard2Digital) + parseInt(resultCard3Digital);
+
+            if (resultCard5 > 22) {
+                resultCard5 = resultCard5 - 22;
+                resultCard5Digital = resultCard5Digital - 22;
+            }
+            switch (resultCard5) {
+              case 1: resultCard5 = 'I'; resultCard5Image = 'https://static.tildacdn.com/tild6333-6666-4838-b539-373162313631/1.jpg'; resultCard5Label = 'Маг'; break;
+              case 2: resultCard5 = 'II'; resultCard5Image = 'https://static.tildacdn.com/tild3030-6539-4164-a539-333730366565/2.jpg'; resultCard5Label = 'Жрица'; break;
+              case 3: resultCard5 = 'III'; resultCard5Image = 'https://static.tildacdn.com/tild6435-6434-4535-b263-613462656164/3.jpg'; resultCard5Label = 'Императрица'; break;
+              case 4: resultCard5 = 'IV'; resultCard5Image = 'https://static.tildacdn.com/tild6437-3835-4566-b631-323761643636/4.jpg'; resultCard5Label = 'Император'; break;
+              case 5: resultCard5 = 'V'; resultCard5Image = 'https://static.tildacdn.com/tild3535-6162-4362-b330-663461663434/5.jpg'; resultCard5Label = 'Жрец'; break;
+              case 6: resultCard5 = 'VI'; resultCard5Image = 'https://static.tildacdn.com/tild3434-6236-4631-b730-353831353230/6.jpg'; resultCard5Label = 'Влюбленные'; break;
+              case 7: resultCard5 = 'VII'; resultCard5Image = 'https://static.tildacdn.com/tild6666-6337-4964-b363-343439363534/7.jpg'; resultCard5Label = 'Колесница'; break;
+              case 8: resultCard5 = 'VIII'; resultCard5Image = 'https://static.tildacdn.com/tild6132-3838-4830-b636-323338303234/8.jpg'; resultCard5Label = 'Правосудие'; break;
+              case 9: resultCard5 = 'IX'; resultCard5Image = 'https://static.tildacdn.com/tild6439-6333-4134-b065-353665663834/9.jpg'; resultCard5Label = 'Отшельник'; break;
+              case 10: resultCard5 = 'X'; resultCard5Image = 'https://static.tildacdn.com/tild6464-3561-4862-b339-356633343531/10.jpg'; resultCard5Label = 'Колесо Фортуны'; break;
+              case 11: resultCard5 = 'XI'; resultCard5Image = 'https://static.tildacdn.com/tild3132-3565-4332-b166-376133373935/11.jpg'; resultCard5Label = 'Сила'; break;
+              case 12: resultCard5 = 'XII'; resultCard5Image = 'https://static.tildacdn.com/tild6566-3534-4165-b262-333337323961/12.jpg'; resultCard5Label = 'Повешенный'; break;
+              case 13: resultCard5 = 'XIII'; resultCard5Image = 'https://static.tildacdn.com/tild6433-6536-4839-b337-653036623336/13.jpg'; resultCard5Label = 'Смерть'; break;
+              case 14: resultCard5 = 'XIV'; resultCard5Image = 'https://static.tildacdn.com/tild6238-3433-4962-b139-613138346130/14.jpg'; resultCard5Label = 'Равновесие'; break;
+              case 15: resultCard5 = 'XV'; resultCard5Image = 'https://static.tildacdn.com/tild6165-6261-4863-a166-383136383834/15.jpg'; resultCard5Label = 'Дьявол'; break;
+              case 16: resultCard5 = 'XVI'; resultCard5Image = 'https://static.tildacdn.com/tild6266-3135-4565-a332-656462643063/16.jpg'; resultCard5Label = 'Башня'; break;
+              case 17: resultCard5 = 'XVII'; resultCard5Image = 'https://static.tildacdn.com/tild3736-3864-4365-b931-376239613736/17.jpg'; resultCard5Label = 'Звезда'; break;
+              case 18: resultCard5 = 'XVIII'; resultCard5Image = 'https://static.tildacdn.com/tild3333-3965-4033-a139-656265353936/18.jpg'; resultCard5Label = 'Луна'; break;
+              case 19: resultCard5 = 'XIX'; resultCard5Image = 'https://static.tildacdn.com/tild3365-3566-4165-a337-326362383230/19.jpg'; resultCard5Label = 'Солнце'; break;
+              case 20: resultCard5 = 'XX'; resultCard5Image = 'https://static.tildacdn.com/tild6136-6338-4232-b338-396632666664/20.jpg'; resultCard5Label = 'Суд'; break;
+              case 21: resultCard5 = 'XXI'; resultCard5Image = 'https://static.tildacdn.com/tild3866-6161-4466-b862-646365343433/21.jpg'; resultCard5Label = 'Мир'; break;
+              case 22: resultCard5 = 'XXII'; resultCard5Image = 'https://static.tildacdn.com/tild3639-3663-4833-b865-346332323935/22.jpg'; resultCard5Label = 'Шут'; break;
+              default:
+                // alert( "" );
+            }
+
+            resultCard6 = parseInt(resultCard4Digital) + parseInt(resultCard5Digital);
+            resultCard6Digital = parseInt(resultCard4Digital) + parseInt(resultCard5Digital);
+            
+            if (resultCard6 > 22) {
+                resultCard6 = resultCard6 - 22;
+                resultCard6Digital = resultCard6Digital - 22;
+            }
+            switch (resultCard6) {
+              case 1: resultCard6 = 'I'; resultCard6Image = 'https://static.tildacdn.com/tild6333-6666-4838-b539-373162313631/1.jpg'; resultCard6Label = 'Маг'; break;
+              case 2: resultCard6 = 'II'; resultCard6Image = 'https://static.tildacdn.com/tild3030-6539-4164-a539-333730366565/2.jpg'; resultCard6Label = 'Жрица'; break;
+              case 3: resultCard6 = 'III'; resultCard6Image = 'https://static.tildacdn.com/tild6435-6434-4535-b263-613462656164/3.jpg'; resultCard6Label = 'Императрица'; break;
+              case 4: resultCard6 = 'IV'; resultCard6Image = 'https://static.tildacdn.com/tild6437-3835-4566-b631-323761643636/4.jpg'; resultCard6Label = 'Император'; break;
+              case 5: resultCard6 = 'V'; resultCard6Image = 'https://static.tildacdn.com/tild3535-6162-4362-b330-663461663434/5.jpg'; resultCard6Label = 'Жрец'; break;
+              case 6: resultCard6 = 'VI'; resultCard6Image = 'https://static.tildacdn.com/tild3434-6236-4631-b730-353831353230/6.jpg'; resultCard6Label = 'Влюбленные'; break;
+              case 7: resultCard6 = 'VII'; resultCard6Image = 'https://static.tildacdn.com/tild6666-6337-4964-b363-343439363534/7.jpg'; resultCard6Label = 'Колесница'; break;
+              case 8: resultCard6 = 'VIII'; resultCard6Image = 'https://static.tildacdn.com/tild6132-3838-4830-b636-323338303234/8.jpg'; resultCard6Label = 'Правосудие'; break;
+              case 9: resultCard6 = 'IX'; resultCard6Image = 'https://static.tildacdn.com/tild6439-6333-4134-b065-353665663834/9.jpg'; resultCard6Label = 'Отшельник'; break;
+              case 10: resultCard6 = 'X'; resultCard6Image = 'https://static.tildacdn.com/tild6464-3561-4862-b339-356633343531/10.jpg'; resultCard6Label = 'Колесо Фортуны'; break;
+              case 11: resultCard6 = 'XI'; resultCard6Image = 'https://static.tildacdn.com/tild3132-3565-4332-b166-376133373935/11.jpg'; resultCard6Label = 'Сила'; break;
+              case 12: resultCard6 = 'XII'; resultCard6Image = 'https://static.tildacdn.com/tild6566-3534-4165-b262-333337323961/12.jpg'; resultCard6Label = 'Повешенный'; break;
+              case 13: resultCard6 = 'XIII'; resultCard6Image = 'https://static.tildacdn.com/tild6433-6536-4839-b337-653036623336/13.jpg'; resultCard6Label = 'Смерть'; break;
+              case 14: resultCard6 = 'XIV'; resultCard6Image = 'https://static.tildacdn.com/tild6238-3433-4962-b139-613138346130/14.jpg'; resultCard6Label = 'Равновесие'; break;
+              case 15: resultCard6 = 'XV'; resultCard6Image = 'https://static.tildacdn.com/tild6165-6261-4863-a166-383136383834/15.jpg'; resultCard6Label = 'Дьявол'; break;
+              case 16: resultCard6 = 'XVI'; resultCard6Image = 'https://static.tildacdn.com/tild6266-3135-4565-a332-656462643063/16.jpg'; resultCard6Label = 'Башня'; break;
+              case 17: resultCard6 = 'XVII'; resultCard6Image = 'https://static.tildacdn.com/tild3736-3864-4365-b931-376239613736/17.jpg'; resultCard6Label = 'Звезда'; break;
+              case 18: resultCard6 = 'XVIII'; resultCard6Image = 'https://static.tildacdn.com/tild3333-3965-4033-a139-656265353936/18.jpg'; resultCard6Label = 'Луна'; break;
+              case 19: resultCard6 = 'XIX'; resultCard6Image = 'https://static.tildacdn.com/tild3365-3566-4165-a337-326362383230/19.jpg'; resultCard6Label = 'Солнце'; break;
+              case 20: resultCard6 = 'XX'; resultCard6Image = 'https://static.tildacdn.com/tild6136-6338-4232-b338-396632666664/20.jpg'; resultCard6Label = 'Суд'; break;
+              case 21: resultCard6 = 'XXI'; resultCard6Image = 'https://static.tildacdn.com/tild3866-6161-4466-b862-646365343433/21.jpg'; resultCard6Label = 'Мир'; break;
+              case 22: resultCard6 = 'XXII'; resultCard6Image = 'https://static.tildacdn.com/tild3639-3663-4833-b865-346332323935/22.jpg'; resultCard6Label = 'Шут'; break;
+              default:
+                // alert( "" );
+            }
+            
+
+
+            $('.result__card[data-card="1"] .result__digital').text(resultCard1);
+            $('.result__card[data-card="2"] .result__digital').text(resultCard2);
+            $('.result__card[data-card="3"] .result__digital').text(resultCard3);
+            $('.result__card[data-card="4"] .result__digital').text(resultCard4);
+            $('.result__card[data-card="5"] .result__digital').text(resultCard5);
+            $('.result__card[data-card="6"] .result__digital').text(resultCard6);
+
+
+            $('.result__card[data-card="1"] .result__image img').attr('src', resultCard1Image);
+            $('.result__card[data-card="1"] .result__label span').text(resultCard1Label);
+
+            $('.result__card[data-card="2"] .result__image img').attr('src', resultCard2Image);
+            $('.result__card[data-card="2"] .result__label span').text(resultCard2Label);
+
+            $('.result__card[data-card="3"] .result__image img').attr('src', resultCard3Image);
+            $('.result__card[data-card="3"] .result__label span').text(resultCard3Label);
+
+            $('.result__card[data-card="4"] .result__image img').attr('src', resultCard4Image);
+            $('.result__card[data-card="4"] .result__label span').text(resultCard4Label);
+
+            $('.result__card[data-card="5"] .result__image img').attr('src', resultCard5Image);
+            $('.result__card[data-card="5"] .result__label span').text(resultCard5Label);
+
+            $('.result__card[data-card="6"] .result__image img').attr('src', resultCard6Image);
+            $('.result__card[data-card="6"] .result__label span').text(resultCard6Label);
+
+
+
+            $("html, body").animate({
+                scrollTop: $('.result').offset().top  - 40 + "px"
+               
+                }, {
+                duration: 700
+            });
+
+            $('.result').fadeIn(300);
+            $('.result').css('opacity',1);
+            $('.footer__wrap').fadeIn(300)
+
+            console.log('resultCard1 => ' + resultCard1Digital);
+            console.log('resultCard1 => ' + resultCard1);
+            console.log('resultCard2 => ' + resultCard2Digital);
+            console.log('resultCard2 => ' + resultCard2);
+            console.log('resultCard3 => ' + resultCard3Digital);
+            console.log('resultCard3 => ' + resultCard3);
+            console.log('resultCard4 => ' + resultCard4Digital);
+            console.log('resultCard4 => ' + resultCard4);
+            console.log('resultCard5 => ' + resultCard5Digital);
+            console.log('resultCard5 => ' + resultCard5);
+            console.log('resultCard6 => ' + resultCard6Digital);
+            console.log('resultCard6 => ' + resultCard6);
+
+
+
+            
+
+        });
+
+        function digit (number) {
+            var figures = "" + number
+            var sum = 0
+
+            for (var i = 0; i < figures.length; i++) 
+                sum += +figures[i]
+            return sum
+        }
+
+
+
+    });
+</script>
+
+
+
+
+</script>
+</body>
+</html>
